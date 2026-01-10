@@ -16,7 +16,18 @@
 
 import type * as playwright from 'playwright';
 
-export type ToolCapability = 'core' | 'core-tabs' | 'core-install' | 'vision' | 'pdf' | 'testing' | 'tracing';
+export type ToolCapability =
+  | 'core'
+  | 'core-tabs'
+  | 'core-install'
+  | 'vision'
+  | 'pdf'
+  | 'testing'
+  | 'tracing'
+  | 'diffs'
+  | 'styles'
+  | 'scenarios'
+  | 'perf';
 
 export type Config = {
   /**
@@ -104,6 +115,10 @@ export type Config = {
    *   - 'core': Core browser automation features.
    *   - 'pdf': PDF generation and manipulation.
    *   - 'vision': Coordinate-based interactions.
+   *   - 'diffs': Snapshot and screenshot diff tools.
+   *   - 'styles': Style/layout snapshot tools.
+   *   - 'scenarios': Scenario runner tools.
+   *   - 'perf': Performance sensing tools.
    */
   capabilities?: ToolCapability[];
 

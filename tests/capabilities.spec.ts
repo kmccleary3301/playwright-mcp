@@ -64,6 +64,47 @@ test('test capabilities (vision)', async ({ startClient }) => {
   expect(toolNames).toContain('browser_mouse_drag_xy');
 });
 
+test('test capabilities (diffs)', async ({ startClient }) => {
+  const { client } = await startClient({
+    args: ['--caps=diffs'],
+  });
+  const { tools } = await client.listTools();
+  const toolNames = tools.map(t => t.name);
+  expect(toolNames).toContain('browser_aria_snapshot_diff');
+  expect(toolNames).toContain('browser_dom_diff');
+  expect(toolNames).toContain('browser_screenshot_diff');
+});
+
+test('test capabilities (styles)', async ({ startClient }) => {
+  const { client } = await startClient({
+    args: ['--caps=styles'],
+  });
+  const { tools } = await client.listTools();
+  const toolNames = tools.map(t => t.name);
+  expect(toolNames).toContain('browser_style_snapshot');
+  expect(toolNames).toContain('browser_style_diff');
+  expect(toolNames).toContain('browser_layout_snapshot');
+  expect(toolNames).toContain('browser_layout_diff');
+});
+
+test('test capabilities (scenarios)', async ({ startClient }) => {
+  const { client } = await startClient({
+    args: ['--caps=scenarios'],
+  });
+  const { tools } = await client.listTools();
+  const toolNames = tools.map(t => t.name);
+  expect(toolNames).toContain('browser_run_scenario');
+});
+
+test('test capabilities (perf)', async ({ startClient }) => {
+  const { client } = await startClient({
+    args: ['--caps=perf'],
+  });
+  const { tools } = await client.listTools();
+  const toolNames = tools.map(t => t.name);
+  expect(toolNames).toContain('browser_collect_longtasks');
+});
+
 test('support for legacy --vision option', async ({ startClient }) => {
   const { client } = await startClient({
     args: ['--vision'],

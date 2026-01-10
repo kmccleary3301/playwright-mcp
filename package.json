@@ -16,7 +16,9 @@
   "license": "Apache-2.0",
   "scripts": {
     "lint": "npm run update-readme",
+    "apply-overrides": "node scripts/apply_playwright_mcp_overrides.js",
     "update-readme": "node update-readme.js",
+    "postinstall": "node scripts/apply_playwright_mcp_overrides.js",
     "docker-build": "docker build --no-cache -t playwright-mcp-dev:latest .",
     "docker-rm": "docker rm playwright-mcp-dev",
     "docker-run": "docker run -it -p 8080:8080 --name playwright-mcp-dev playwright-mcp-dev:latest",

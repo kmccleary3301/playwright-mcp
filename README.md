@@ -331,7 +331,8 @@ Playwright MCP server supports following arguments. They can be provided in the 
                                         webkit, msedge.
   --caps <caps>                         comma-separated list of additional
                                         capabilities to enable, possible values:
-                                        vision, pdf.
+                                        vision, pdf, diffs, styles, scenarios,
+                                        perf.
   --cdp-endpoint <endpoint>             CDP endpoint to connect to.
   --cdp-header <headers...>             CDP headers to send with the connect
                                         request, multiple can be specified.
@@ -588,6 +589,10 @@ npx @playwright/mcp@latest --config path/to/config.json
    *   - 'core': Core browser automation features.
    *   - 'pdf': PDF generation and manipulation.
    *   - 'vision': Coordinate-based interactions.
+   *   - 'diffs': Snapshot and screenshot diff tools.
+   *   - 'styles': Style/layout snapshot tools.
+   *   - 'scenarios': Scenario runner tools.
+   *   - 'perf': Performance sensing tools.
    */
   capabilities?: ToolCapability[];
 
@@ -1001,6 +1006,164 @@ http.createServer(async (req, res) => {
   - Description: Install the browser specified in the config. Call this if you get an error about the browser not being installed.
   - Parameters: None
   - Read-only: **false**
+
+</details>
+
+<details>
+<summary><b>Diffs & snapshots (opt-in via --caps=diffs)</b></summary>
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_aria_snapshot_diff**
+  - Title: ARIA snapshot diff
+  - Description: Compare current ARIA snapshot against a baseline file
+  - Parameters:
+    - `baselinePath` (string): Path to baseline snapshot (raw YAML or full snapshot output)
+    - `currentPath` (string, optional): Optional file path to save current snapshot
+    - `diffPath` (string, optional): Optional file path to save the diff
+    - `maxDiffLines` (number, optional): Maximum diff lines to include in response
+    - `failOnDiff` (boolean, optional): Whether to fail when diff is detected (default true)
+  - Read-only: **false**
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_dom_diff**
+  - Title: DOM snapshot diff
+  - Description: Compare DOM snapshot against a baseline file
+  - Parameters:
+    - `baselinePath` (string): Path to baseline DOM snapshot
+    - `element` (string, optional): Human-readable element description
+    - `ref` (string, optional): Exact target element reference
+    - `diffPath` (string, optional): Optional file path to save the diff
+    - `maxDiffLines` (number, optional): Maximum diff lines to include in response
+    - `failOnDiff` (boolean, optional): Whether to fail when diff is detected (default true)
+    - `stripScripts` (boolean, optional): Remove script tags (default true)
+    - `stripStyles` (boolean, optional): Remove style tags (default false)
+    - `normalize` (string, optional): Normalization mode (default light)
+  - Read-only: **false**
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_dom_snapshot**
+  - Title: DOM snapshot
+  - Description: Capture DOM snapshot of the page or an element
+  - Parameters:
+    - `element` (string, optional): Human-readable element description
+    - `ref` (string, optional): Exact target element reference
+    - `filename` (string, optional): File name to save snapshot to
+    - `stripScripts` (boolean, optional): Remove script tags (default true)
+    - `stripStyles` (boolean, optional): Remove style tags (default false)
+    - `normalize` (string, optional): Normalization mode (default light)
+  - Read-only: **true**
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_screenshot_diff**
+  - Title: Screenshot diff
+  - Description: Compare a screenshot against a baseline image
+  - Parameters:
+    - `baselinePath` (string): Path to baseline PNG image
+    - `element` (string, optional): Human-readable element description
+    - `ref` (string, optional): Exact target element reference
+    - `fullPage` (boolean, optional): Capture full page screenshot (ignored for element screenshots)
+    - `threshold` (number, optional): Pixelmatch threshold (0-1, default 0.1)
+    - `diffPath` (string, optional): File path to save diff image
+    - `currentPath` (string, optional): File path to save current screenshot
+    - `highlight` (boolean, optional): Highlight target element before screenshot
+    - `disableAnimations` (boolean, optional): Disable CSS animations/transitions before screenshot
+    - `failOnDiff` (boolean, optional): Whether to fail when diff is detected (default true)
+  - Read-only: **false**
+
+</details>
+
+<details>
+<summary><b>Style/layout tools (opt-in via --caps=styles)</b></summary>
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_layout_diff**
+  - Title: Layout snapshot diff
+  - Description: Compare layout snapshot against baseline
+  - Parameters:
+    - `baselinePath` (string): Path to baseline layout snapshot JSON
+    - `targets` (array): Elements to capture layout for
+    - `includeText` (boolean, optional): Include truncated text content
+    - `diffPath` (string, optional): File path to save diff JSON
+    - `failOnDiff` (boolean, optional): Whether to fail when diff is detected (default true)
+    - `maxDiffs` (number, optional): Maximum diffs to include in response
+  - Read-only: **false**
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_layout_snapshot**
+  - Title: Layout snapshot
+  - Description: Capture layout metrics for specific elements
+  - Parameters:
+    - `targets` (array): Elements to capture layout for
+    - `includeText` (boolean, optional): Include truncated text content
+    - `filename` (string, optional): File name to save snapshot to
+  - Read-only: **true**
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_style_diff**
+  - Title: Style snapshot diff
+  - Description: Compare computed style snapshot against baseline
+  - Parameters:
+    - `baselinePath` (string): Path to baseline style snapshot JSON
+    - `targets` (array): Elements to capture styles for
+    - `properties` (array, optional): CSS properties to capture
+    - `preset` (string, optional): Preset property group
+    - `includeLayout` (boolean, optional): Include layout metrics in snapshot
+    - `includeText` (boolean, optional): Include truncated text content
+    - `diffPath` (string, optional): File path to save diff JSON
+    - `failOnDiff` (boolean, optional): Whether to fail when diff is detected (default true)
+    - `maxDiffs` (number, optional): Maximum diffs to include in response
+  - Read-only: **false**
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_style_snapshot**
+  - Title: Style snapshot
+  - Description: Capture computed style snapshot for specific elements
+  - Parameters:
+    - `targets` (array): Elements to capture styles for
+    - `properties` (array, optional): CSS properties to capture
+    - `preset` (string, optional): Preset property group
+    - `includeLayout` (boolean, optional): Include layout metrics in snapshot
+    - `includeText` (boolean, optional): Include truncated text content
+    - `filename` (string, optional): File name to save snapshot to
+  - Read-only: **true**
+
+</details>
+
+<details>
+<summary><b>Scenario runner (opt-in via --caps=scenarios)</b></summary>
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_run_scenario**
+  - Title: Run scenario
+  - Description: Run a Markdown scenario file with deterministic steps
+  - Parameters:
+    - `file` (string): Path to scenario markdown file
+    - `mode` (string, optional): Execution mode (spec or debug)
+    - `baseUrl` (string, optional): Base URL override
+  - Read-only: **false**
+
+</details>
+
+<details>
+<summary><b>Performance sensing (opt-in via --caps=perf)</b></summary>
+
+<!-- NOTE: This has been generated via update-readme.js -->
+
+- **browser_collect_longtasks**
+  - Title: Collect long tasks
+  - Description: Collect long task entries over a duration (in ms)
+  - Parameters:
+    - `durationMs` (number, optional): Duration to observe long tasks, in ms (default 1000)
+  - Read-only: **true**
 
 </details>
 
