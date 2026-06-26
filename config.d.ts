@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type * as playwright from '../../..';
+import type * as playwright from 'playwright';
 
 export type ToolCapability =
   'config' |
@@ -28,7 +28,11 @@ export type ToolCapability =
   'storage' |
   'testing' |
   'vision' |
-  'devtools';
+  'devtools' |
+  'diffs' |
+  'styles' |
+  'scenarios' |
+  'perf';
 
 export type Config = {
   /**
@@ -133,6 +137,10 @@ export type Config = {
    *   - 'pdf': PDF generation and manipulation.
    *   - 'vision': Coordinate-based interactions.
    *   - 'devtools': Developer tools features.
+   *   - 'diffs': Snapshot, DOM, and screenshot diff tools.
+   *   - 'styles': Computed style and layout snapshot tools.
+   *   - 'scenarios': Markdown scenario runner tools.
+   *   - 'perf': Performance sampling tools.
    */
   capabilities?: ToolCapability[];
 

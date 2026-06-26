@@ -630,6 +630,10 @@ npx @playwright/mcp@latest --config path/to/config.json
    *   - 'pdf': PDF generation and manipulation.
    *   - 'vision': Coordinate-based interactions.
    *   - 'devtools': Developer tools features.
+   *   - 'diffs': Snapshot, DOM, and screenshot diff tools.
+   *   - 'styles': Computed style and layout snapshot tools.
+   *   - 'scenarios': Markdown scenario runner tools.
+   *   - 'perf': Performance sampling tools.
    */
   capabilities?: ToolCapability[];
 
